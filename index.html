@@ -16,16 +16,17 @@
     margin-bottom: 25px;
   }
 
-  img {
+  .zoomable {
     width: 300px;
     max-width: 90%;
     border-radius: 10px;
     transition: transform 0.4s ease;
     cursor: zoom-in;
     box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    display: inline-block;
   }
 
-  img.zoomed {
+  .zoomed {
     transform: scale(1.8);
     cursor: zoom-out;
     z-index: 10;
@@ -37,13 +38,14 @@
 
 <h2>روی عکس کلیک کن تا درجا زوم شود</h2>
 
-<img src="photo.jpg" alt="عکس شما" id="zoomImg">
+<img src="photo.jpg" alt="عکس شما" id="zoomImg" class="zoomable">
 
 <script>
   const img = document.getElementById('zoomImg');
 
-  img.addEventListener('click', () => {
-    img.classList.toggle('zoomed');
+  img.addEventListener('click', function(event) {
+    event.preventDefault(); // جلوگیری از باز شدن صفحه جدید
+    this.classList.toggle('zoomed');
   });
 </script>
 
