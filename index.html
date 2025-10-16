@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>زوم در همان صفحه</title>
+<title>زوم عکس</title>
 <style>
   body {
     font-family: sans-serif;
@@ -23,14 +23,11 @@
     transition: transform 0.4s ease;
     cursor: zoom-in;
     box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-    display: inline-block;
   }
 
   .zoomed {
     transform: scale(1.8);
     cursor: zoom-out;
-    z-index: 10;
-    position: relative;
   }
 </style>
 </head>
@@ -38,14 +35,14 @@
 
 <h2>روی عکس کلیک کن تا درجا زوم شود</h2>
 
+<!-- 🖼 اینجا فقط لینک عکس را عوض کن -->
 <img src="photo.jpg" alt="عکس شما" id="zoomImg" class="zoomable">
 
 <script>
   const img = document.getElementById('zoomImg');
-
-  img.addEventListener('click', function(event) {
-    event.preventDefault(); // جلوگیری از باز شدن صفحه جدید
-    this.classList.toggle('zoomed');
+  img.addEventListener('click', function(e) {
+    e.preventDefault();
+    img.classList.toggle('zoomed');
   });
 </script>
 
