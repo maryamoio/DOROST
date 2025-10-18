@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>زوم عکس</title>
+<title>گالری مخفی با زوم</title>
 <style>
   body {
     font-family: sans-serif;
@@ -16,8 +16,33 @@
     margin-bottom: 25px;
   }
 
+  /* دکمه */
+  .show-btn {
+    background: #6c63ff;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    padding: 12px 30px;
+    cursor: pointer;
+    font-size: 18px;
+    transition: background 0.3s;
+  }
+
+  .show-btn:hover {
+    background: #5a53d6;
+  }
+
+  /* گالری عکس‌ها */
+  .gallery {
+    display: none;
+    margin-top: 30px;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 20px;
+  }
+
   .zoomable {
-    width: 300px;
+    width: 250px;
     max-width: 90%;
     border-radius: 10px;
     transition: transform 0.4s ease;
@@ -29,20 +54,51 @@
     transform: scale(1.8);
     cursor: zoom-out;
   }
+
+  .fade-in {
+    animation: fadeIn 0.8s ease;
+  }
+
+  @keyframes fadeIn {
+    from {opacity: 0; transform: scale(0.9);}
+    to {opacity: 1; transform: scale(1);}
+  }
 </style>
 </head>
 <body>
 
-<h2>روی عکس کلیک کن تا درجا زوم شود</h2>
+<h2>برای دیدن عکس‌ها روی دکمه زیر بزن 👇</h2>
 
-<!-- 🖼 اینجا فقط لینک عکس را عوض کن -->
-<img src="photo.jpg.png" alt="عکس شما" id="zoomImg" class="zoomable">
+<button class="show-btn" id="toggleBtn">نمایش عکس‌ها</button>
+
+<div class="gallery" id="gallery">
+  <img src="photo1.jpg" alt="عکس ۱" class="zoomable">
+  <img src="photo2.jpg" alt="عکس ۲" class="zoomable">
+  <img src="photo3.jpg" alt="عکس ۳" class="zoomable">
+</div>
 
 <script>
-  const img = document.getElementById('zoomImg');
-  img.addEventListener('click', function(e) {
-    e.preventDefault();
-    img.classList.toggle('zoomed');
+  const btn = document.getElementById('toggleBtn');
+  const gallery = document.getElementById('gallery');
+  const images = document.querySelectorAll('.zoomable');
+
+  // باز و بسته کردن گالری
+  btn.addEventListener('click', () => {
+    if (gallery.style.display === 'flex') {
+      gallery.style.display = 'none';
+      btn.textContent = 'نمایش عکس‌ها';
+    } else {
+      gallery.style.display = 'flex';
+      gallery.classList.add('fade-in');
+      btn.textContent = 'بستن عکس‌ها';
+    }
+  });
+
+  // زوم روی عکس‌ها
+  images.forEach(img => {
+    img.addEventListener('click', () => {
+      img.classList.toggle('zoomed');
+    });
   });
 </script>
 
